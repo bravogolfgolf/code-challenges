@@ -15,10 +15,14 @@ public class Table {
     }
 
     public boolean add(Reservation reservation) {
-        int currentTotal = reservations.stream().mapToInt(r -> r.getSize()).sum();
-        int remainingCapacity = capacity - currentTotal;
-        if (reservation.getSize() < remainingCapacity)
+        if (tableHasCapacityFor(reservation))
             return reservations.add(reservation);
         return false;
+    }
+
+    private boolean tableHasCapacityFor(Reservation reservation) {
+        int currentTotal = reservations.stream().mapToInt(Reservation::getSize).sum();
+        int remainingCapacity = capacity - currentTotal;
+        return reservation.getSize() < remainingCapacity;
     }
 }
