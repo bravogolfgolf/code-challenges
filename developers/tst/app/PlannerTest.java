@@ -90,4 +90,16 @@ public class PlannerTest {
         planner.add(reservation);
         planner.plan();
     }
+
+    @Test
+    public void shouldAssignReservationsToTable() {
+        Table table = new Table("A", 10);
+        planner.add(table);
+        Reservation reservation = new Reservation("Owens", 3, list);
+        Reservation reservation1 = new Reservation("Smith", 3, list);
+        planner.add(reservation);
+        planner.add(reservation1);
+        planner.plan();
+        assertEquals(4, planner.tableRemainingCapacity());
+    }
 }

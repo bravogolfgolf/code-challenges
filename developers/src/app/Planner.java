@@ -33,7 +33,14 @@ public class Planner {
     }
 
     public void plan() {
-        throw new InsufficientSeatingCapacity();
+        boolean success = false;
+        for (Reservation reservation : reservations) {
+            for (Table table : tables) {
+                success = table.add(reservation);
+                if (success) break;
+            }
+        }
+        if (!success) throw new InsufficientSeatingCapacity();
     }
 
     class InsufficientSeatingCapacity extends RuntimeException {
