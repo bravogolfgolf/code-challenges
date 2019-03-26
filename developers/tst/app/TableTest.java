@@ -41,6 +41,6 @@ public class TableTest {
 
     @Test
     public void tablesReportCapacity() {
-        assertEquals(10, table.getCapacity());
+        assertEquals(10, table.capacity());
     }
 }

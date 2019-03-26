@@ -27,7 +27,7 @@ public class Table {
         return reservation.getSize() < remainingCapacity;
     }
 
-    public int getCapacity() {
+    public int capacity() {
         return capacity;
     }
 

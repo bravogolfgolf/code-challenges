@@ -21,7 +21,7 @@ public class Planner {
     }
 
     public int tableCapacity() {
-        return tables.stream().mapToInt(Table::getCapacity).sum();
+        return tables.stream().mapToInt(Table::capacity).sum();
     }
 
     public int reservationCount() {
