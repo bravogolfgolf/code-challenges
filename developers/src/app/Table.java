@@ -22,13 +22,12 @@ public class Table {
     }
 
     private boolean tableHasCapacityFor(Reservation reservation) {
-        int currentTotal = reservations.stream().mapToInt(Reservation::getSize).sum();
-        int remainingCapacity = capacity - currentTotal;
-        return reservation.getSize() < remainingCapacity;
+        return reservation.getSize() < remainingCapacity();
     }
 
-    public int capacity() {
-        return capacity;
+    public int remainingCapacity() {
+        int currentTotal = reservations.stream().mapToInt(Reservation::getSize).sum();
+        return capacity - currentTotal;
     }
 
     @Override

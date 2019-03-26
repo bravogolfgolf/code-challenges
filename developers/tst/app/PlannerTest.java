@@ -42,17 +42,17 @@ public class PlannerTest {
         planner.add(table);
         planner.add(table1);
         assertEquals(1, planner.tableCount());
-        assertEquals(10, planner.tableCapacity());
+        assertEquals(10, planner.tableRemainingCapacity());
     }
 
     @Test
-    public void plannerReportsTableCapacity() {
+    public void plannerReportsRemainingTableCapacity() {
         Table table = new Table("A", 10);
         Table table1 = new Table("B", 10);
         planner.add(table);
         planner.add(table1);
         assertEquals(2, planner.tableCount());
-        assertEquals(20, planner.tableCapacity());
+        assertEquals(20, planner.tableRemainingCapacity());
     }
 
     @Test

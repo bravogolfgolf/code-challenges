@@ -40,7 +40,7 @@ public class TableTest {
     }
 
     @Test
-    public void tablesReportCapacity() {
-        assertEquals(10, table.capacity());
+    public void tablesReportRemainingCapacity() {
+        assertEquals(10, table.remainingCapacity());
     }
 }

@@ -20,8 +20,8 @@ public class Planner {
         return tables.size();
     }
 
-    public int tableCapacity() {
-        return tables.stream().mapToInt(Table::capacity).sum();
+    public int tableRemainingCapacity() {
+        return tables.stream().mapToInt(Table::remainingCapacity).sum();
     }
 
     public int reservationCount() {
