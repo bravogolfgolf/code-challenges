@@ -36,4 +36,14 @@ public class PlannerTest {
         assertEquals(2, planner.tableCount());
         assertEquals(20, planner.getTotalCapacity());
     }
+
+    @Test
+    public void plannersDoNotAcceptDuplicateTableIds() {
+        Table table = new Table("A", 10);
+        Table table1 = new Table("A", 10);
+        planner.add(table);
+        planner.add(table1);
+        assertEquals(1, planner.tableCount());
+        assertEquals(10, planner.getTotalCapacity());
+    }
 }

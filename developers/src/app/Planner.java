@@ -1,11 +1,11 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Planner {
 
-    List<Table> tables = new ArrayList<>();
+    Set<Table> tables = new HashSet<>();
 
     public void add(Table table) {
         tables.add(table);
