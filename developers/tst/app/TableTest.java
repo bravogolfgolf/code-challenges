@@ -28,13 +28,13 @@ public class TableTest {
     }
 
     @Test
-    public void adding_reservation_to_table_with_capacity_succeeds() {
+    public void addingReservationToTableWithCapacitySucceeds() {
         Reservation reservation = new Reservation("Owens", 3, list);
         assertTrue(table.add(reservation));
     }
 
     @Test
-    public void adding_reservation_to_table_without_capacity_fails() {
+    public void addingReservationToTableWithoutCapacityFails() {
         Reservation reservation = new Reservation("Owens", 11, list);
         assertFalse(table.add(reservation));
     }
