@@ -1,5 +1,6 @@
 package app;
 
+import app.Planner.InsufficientSeatingCapacity;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -79,5 +80,14 @@ public class PlannerTest {
         planner.add(reservation1);
         assertEquals(2, planner.reservationCount());
         assertEquals(6, planner.reservationTotal());
+    }
+
+    @Test(expected = InsufficientSeatingCapacity.class)
+    public void shouldThrowExceptionWhenInsufficientCapacityForAllReservations() {
+        Table table = new Table("A", 10);
+        planner.add(table);
+        Reservation reservation = new Reservation("Owens", 13, list);
+        planner.add(reservation);
+        planner.plan();
     }
 }

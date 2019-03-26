@@ -31,4 +31,11 @@ public class Planner {
     public int reservationTotal() {
         return reservations.stream().mapToInt(Reservation::getSize).sum();
     }
+
+    public void plan() {
+        throw new InsufficientSeatingCapacity();
+    }
+
+    class InsufficientSeatingCapacity extends RuntimeException {
+    }
 }
