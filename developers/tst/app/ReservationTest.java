@@ -1,5 +1,6 @@
 package app;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,23 +11,25 @@ import static org.junit.Assert.assertTrue;
 
 public class ReservationTest {
 
-    @Test
-    public void createReservation() {
-        List<String> list = new ArrayList<String>() {{
+    private List<String> list;
+    private Reservation reservation;
+
+    @Before
+    public void setUp() throws Exception {
+        list = new ArrayList<String>() {{
             add("Thornton");
             add("Taylor");
         }};
-        Reservation reservation = new Reservation("Owens", 3, list);
+        reservation = new Reservation("Owens", 3, list);
+    }
+
+    @Test
+    public void createReservation() {
         assertTrue(reservation instanceof Reservation);
     }
 
     @Test
-    public void reservationHasCorrectSize(){
-        List<String> list = new ArrayList<String>() {{
-            add("Thornton");
-            add("Taylor");
-        }};
-        Reservation reservation = new Reservation("Owens", 3, list);
-        assertEquals(3,reservation.getSize());
+    public void reservationHasCorrectSize() {
+        assertEquals(3, reservation.getSize());
     }
 }
