@@ -3,16 +3,24 @@ package app;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PlannerTest {
 
     private Planner planner;
+    private List<String> list;
 
     @Before
     public void setUp() {
         planner = new Planner();
+        list = new ArrayList<String>() {{
+            add("Thornton");
+            add("Taylor");
+        }};
     }
 
     @Test
@@ -45,5 +53,12 @@ public class PlannerTest {
         planner.add(table1);
         assertEquals(1, planner.tableCount());
         assertEquals(10, planner.getTotalCapacity());
+    }
+
+    @Test
+    public void plannersAcceptReservations() {
+        Reservation reservation = new Reservation("Owens", 3, list);
+        planner.add(reservation);
+        assertEquals(1, planner.reservationCount());
     }
 }

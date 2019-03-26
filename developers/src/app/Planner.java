@@ -6,6 +6,7 @@ import java.util.Set;
 public class Planner {
 
     Set<Table> tables = new HashSet<>();
+    Set<Reservation> reservations = new HashSet<>();
 
     public void add(Table table) {
         tables.add(table);
@@ -17,5 +18,13 @@ public class Planner {
 
     public int getTotalCapacity() {
         return tables.stream().mapToInt(Table::getCapacity).sum();
+    }
+
+    public void add(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+    public int reservationCount() {
+        return reservations.size();
     }
 }
