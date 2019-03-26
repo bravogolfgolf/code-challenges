@@ -6,8 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TableTest {
 
@@ -38,5 +37,11 @@ public class TableTest {
     public void adding_reservation_to_table_without_capacity_fails() {
         Reservation reservation = new Reservation("Owens", 11, list);
         assertFalse(table.add(reservation));
+    }
+
+
+    @Test
+    public void tablesReportCapacity() {
+        assertEquals(10, table.getCapacity());
     }
 }

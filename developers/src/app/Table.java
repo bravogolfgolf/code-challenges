@@ -25,4 +25,8 @@ public class Table {
         int remainingCapacity = capacity - currentTotal;
         return reservation.getSize() < remainingCapacity;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
