@@ -27,4 +27,8 @@ public class Planner {
     public int reservationCount() {
         return reservations.size();
     }
+
+    public int totalReservations() {
+        return reservations.stream().mapToInt(Reservation::getSize).sum();
+    }
 }

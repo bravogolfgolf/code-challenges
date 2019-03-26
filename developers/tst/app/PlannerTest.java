@@ -70,4 +70,14 @@ public class PlannerTest {
         planner.add(reservation1);
         assertEquals(1, planner.reservationCount());
     }
+
+    @Test
+    public void plannersReportsTotalNumberOfReservations() {
+        Reservation reservation = new Reservation("Owens", 3, list);
+        Reservation reservation1 = new Reservation("Smith", 3, list);
+        planner.add(reservation);
+        planner.add(reservation1);
+        assertEquals(2, planner.reservationCount());
+        assertEquals(6, planner.totalReservations());
+    }
 }
