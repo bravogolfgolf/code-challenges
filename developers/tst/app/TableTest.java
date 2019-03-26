@@ -39,7 +39,6 @@ public class TableTest {
         assertFalse(table.add(reservation));
     }
 
-
     @Test
     public void tablesReportCapacity() {
         assertEquals(10, table.getCapacity());
