@@ -26,4 +26,14 @@ public class PlannerTest {
         planner.add(table);
         assertEquals(1, planner.tableCount());
     }
+
+    @Test
+    public void plannersReportTotalCapacity() {
+        Table table = new Table("A", 10);
+        Table table1 = new Table("B", 10);
+        planner.add(table);
+        planner.add(table1);
+        assertEquals(2, planner.tableCount());
+        assertEquals(20, planner.getTotalCapacity());
+    }
 }

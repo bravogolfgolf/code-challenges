@@ -14,4 +14,8 @@ public class Planner {
     public int tableCount() {
         return tables.size();
     }
+
+    public int getTotalCapacity() {
+        return tables.stream().mapToInt(Table::getCapacity).sum();
+    }
 }
