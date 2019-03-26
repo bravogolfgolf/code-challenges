@@ -29,41 +29,41 @@ public class PlannerTest {
     }
 
     @Test
-    public void plannersAcceptTables() {
+    public void plannerAcceptTables() {
         Table table = new Table("A", 10);
         planner.add(table);
         assertEquals(1, planner.tableCount());
     }
 
     @Test
-    public void plannersReportTotalCapacity() {
-        Table table = new Table("A", 10);
-        Table table1 = new Table("B", 10);
-        planner.add(table);
-        planner.add(table1);
-        assertEquals(2, planner.tableCount());
-        assertEquals(20, planner.getTotalCapacity());
-    }
-
-    @Test
-    public void plannersDoNotAcceptDuplicateTableIds() {
+    public void plannerDoesNotAcceptDuplicateTableIds() {
         Table table = new Table("A", 10);
         Table table1 = new Table("A", 10);
         planner.add(table);
         planner.add(table1);
         assertEquals(1, planner.tableCount());
-        assertEquals(10, planner.getTotalCapacity());
+        assertEquals(10, planner.tableCapacity());
     }
 
     @Test
-    public void plannersAcceptReservations() {
+    public void plannerReportsTableCapacity() {
+        Table table = new Table("A", 10);
+        Table table1 = new Table("B", 10);
+        planner.add(table);
+        planner.add(table1);
+        assertEquals(2, planner.tableCount());
+        assertEquals(20, planner.tableCapacity());
+    }
+
+    @Test
+    public void plannerAcceptsReservations() {
         Reservation reservation = new Reservation("Owens", 3, list);
         planner.add(reservation);
         assertEquals(1, planner.reservationCount());
     }
 
     @Test
-    public void plannersDoNotAcceptDuplicateReservationIds() {
+    public void plannerDoesNotAcceptDuplicateReservationIds() {
         Reservation reservation = new Reservation("Owens", 3, list);
         Reservation reservation1 = new Reservation("Owens", 3, list);
         planner.add(reservation);
@@ -72,12 +72,12 @@ public class PlannerTest {
     }
 
     @Test
-    public void plannersReportsTotalNumberOfReservations() {
+    public void plannerReportsReservationTotal() {
         Reservation reservation = new Reservation("Owens", 3, list);
         Reservation reservation1 = new Reservation("Smith", 3, list);
         planner.add(reservation);
         planner.add(reservation1);
         assertEquals(2, planner.reservationCount());
-        assertEquals(6, planner.totalReservations());
+        assertEquals(6, planner.reservationTotal());
     }
 }

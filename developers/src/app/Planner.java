@@ -12,23 +12,23 @@ public class Planner {
         tables.add(table);
     }
 
+    public void add(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
     public int tableCount() {
         return tables.size();
     }
 
-    public int getTotalCapacity() {
+    public int tableCapacity() {
         return tables.stream().mapToInt(Table::getCapacity).sum();
-    }
-
-    public void add(Reservation reservation) {
-        reservations.add(reservation);
     }
 
     public int reservationCount() {
         return reservations.size();
     }
 
-    public int totalReservations() {
+    public int reservationTotal() {
         return reservations.stream().mapToInt(Reservation::getSize).sum();
     }
 }
