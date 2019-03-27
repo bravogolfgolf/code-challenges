@@ -24,6 +24,12 @@ public class Table implements Comparable<Table> {
         return reservation.getSize() <= remainingCapacity();
     }
 
+    @Override
+    public String toString() {
+        return String.format("Table %s(%d): ", id, remainingCapacity());
+
+    }
+
     int remainingCapacity() {
         int currentTotal = reservations.stream().mapToInt(Reservation::getSize).sum();
         return capacity - currentTotal;

@@ -13,6 +13,11 @@ public class Reservation implements Comparable<Reservation> {
         this.constraints = constraints;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s party of %d", id, size);
+    }
+
     int getSize() {
         return size;
     }
@@ -25,9 +30,9 @@ public class Reservation implements Comparable<Reservation> {
             else if (this.size < that.size)
                 return 1;
             else if (this.constraints.size() > that.constraints.size())
-                return 1;
-            else
                 return -1;
+            else
+                return 1;
         else return 0;
     }
 }
