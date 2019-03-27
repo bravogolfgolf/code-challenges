@@ -102,4 +102,20 @@ public class PlannerTest {
         planner.plan();
         assertEquals(4, planner.tableRemainingCapacity());
     }
+
+    @Test
+    public void shouldAssignReservationsAcrossTables() {
+        Table table = new Table("A", 5);
+        Table table1 = new Table("B", 10);
+        planner.add(table);
+        planner.add(table1);
+        Reservation reservation = new Reservation("Owens", 3, list);
+        Reservation reservation1 = new Reservation("Smith", 3, list);
+        planner.add(reservation);
+        planner.add(reservation1);
+        planner.plan();
+        assertEquals(9, planner.tableRemainingCapacity());
+        assertEquals(2, table.remainingCapacity());
+        assertEquals(7, table1.remainingCapacity());
+    }
 }
