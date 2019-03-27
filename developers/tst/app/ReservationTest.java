@@ -7,16 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ReservationTest {
 
-    private List<String> list;
     private Reservation reservation;
 
     @Before
-    public void setUp() throws Exception {
-        list = new ArrayList<String>() {{
+    public void setUp() {
+        List<String> list = new ArrayList<String>() {{
             add("Thornton");
             add("Taylor");
         }};
@@ -24,12 +22,12 @@ public class ReservationTest {
     }
 
     @Test
-    public void createReservation() {
-        assertTrue(reservation instanceof Reservation);
+    public void shouldReturnValueSetToConstructor() {
+        assertEquals("Owens", reservation.id());
     }
 
     @Test
-    public void reservationHasCorrectSize() {
-        assertEquals(3, reservation.getSize());
+    public void shouldReturnSizeSetToConstructor() {
+        assertEquals(3, reservation.size());
     }
 }

@@ -13,13 +13,17 @@ public class Reservation implements Comparable<Reservation> {
         this.constraints = constraints;
     }
 
+    String id() {
+        return id;
+    }
+
+    int size() {
+        return size;
+    }
+
     @Override
     public String toString() {
         return String.format("%s party of %d", id, size);
-    }
-
-    int getSize() {
-        return size;
     }
 
     @Override
