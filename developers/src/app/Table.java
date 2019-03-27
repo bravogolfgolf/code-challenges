@@ -14,7 +14,7 @@ public class Table implements Comparable<Table> {
         this.capacity = capacity;
     }
 
-    public boolean add(Reservation reservation) {
+    boolean add(Reservation reservation) {
         if (tableHasCapacityFor(reservation))
             return reservations.add(reservation);
         return false;
@@ -24,7 +24,7 @@ public class Table implements Comparable<Table> {
         return reservation.getSize() <= remainingCapacity();
     }
 
-    public int remainingCapacity() {
+    int remainingCapacity() {
         int currentTotal = reservations.stream().mapToInt(Reservation::getSize).sum();
         return capacity - currentTotal;
     }

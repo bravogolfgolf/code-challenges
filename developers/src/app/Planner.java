@@ -3,36 +3,36 @@ package app;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Planner {
+class Planner {
 
-    Set<Table> tables = new TreeSet<>();
-    Set<Reservation> reservations = new TreeSet<>();
+    private Set<Table> tables = new TreeSet<>();
+    private Set<Reservation> reservations = new TreeSet<>();
 
-    public void add(Table table) {
+    void add(Table table) {
         tables.add(table);
     }
 
-    public void add(Reservation reservation) {
+    void add(Reservation reservation) {
         reservations.add(reservation);
     }
 
-    public int tableCount() {
+    int tableCount() {
         return tables.size();
     }
 
-    public int tableRemainingCapacity() {
+    int tableRemainingCapacity() {
         return tables.stream().mapToInt(Table::remainingCapacity).sum();
     }
 
-    public int reservationCount() {
+    int reservationCount() {
         return reservations.size();
     }
 
-    public int reservationTotal() {
+    int reservationTotal() {
         return reservations.stream().mapToInt(Reservation::getSize).sum();
     }
 
-    public void plan() {
+    void plan() {
         if (tableRemainingCapacity() < reservationTotal()) insufficientCapacity();
         boolean allReservationsAllocated = unconstrainedAllocation();
         if (!allReservationsAllocated) insufficientCapacity();

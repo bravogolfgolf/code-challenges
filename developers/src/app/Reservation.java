@@ -7,13 +7,13 @@ public class Reservation implements Comparable<Reservation> {
     private final int size;
     private final List<String> constraints;
 
-    public Reservation(String id, int size, List<String> constraints) {
+    Reservation(String id, int size, List<String> constraints) {
         this.id = id;
         this.size = size;
         this.constraints = constraints;
     }
 
-    public int getSize() {
+    int getSize() {
         return size;
     }
 
