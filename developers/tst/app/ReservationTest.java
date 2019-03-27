@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ReservationTest {
 
@@ -29,5 +30,10 @@ public class ReservationTest {
     @Test
     public void shouldReturnSizeSetToConstructor() {
         assertEquals(3, reservation.size());
+    }
+
+    @Test
+    public void shouldReturnTrueIfDislike() {
+        assertTrue(reservation.dislike("Thornton"));
     }
 }

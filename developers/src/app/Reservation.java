@@ -21,6 +21,10 @@ public class Reservation implements Comparable<Reservation> {
         return size;
     }
 
+    boolean dislike(String name) {
+        return constraints.contains(name);
+    }
+
     @Override
     public String toString() {
         return String.format("%s party of %d", id, size);
