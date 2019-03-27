@@ -118,4 +118,17 @@ public class PlannerTest {
         assertEquals(2, table.remainingCapacity());
         assertEquals(7, table1.remainingCapacity());
     }
+
+    @Test(expected = InsufficientSeatingCapacity.class)
+    public void shouldThrowExceptionWhenSufficientCapacityForAllReservationsButAllReservationAreNotAllocated() {
+        Table table = new Table("A", 4);
+        Table table1 = new Table("B", 2);
+        planner.add(table);
+        planner.add(table1);
+        Reservation reservation = new Reservation("Owens", 3, list);
+        Reservation reservation1 = new Reservation("Smith", 3, list);
+        planner.add(reservation);
+        planner.add(reservation1);
+        planner.plan();
+    }
 }

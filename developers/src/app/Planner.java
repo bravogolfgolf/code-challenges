@@ -33,6 +33,16 @@ public class Planner {
     }
 
     public void plan() {
+        if (tableRemainingCapacity() < reservationTotal()) insufficientCapacity();
+        boolean allReservationsAllocated = unconstrainedAllocation();
+        if (!allReservationsAllocated) insufficientCapacity();
+    }
+
+    private void insufficientCapacity() {
+        throw new InsufficientSeatingCapacity();
+    }
+
+    private boolean unconstrainedAllocation() {
         boolean success = false;
         for (Reservation reservation : reservations) {
             for (Table table : tables) {
@@ -40,7 +50,7 @@ public class Planner {
                 if (success) break;
             }
         }
-        if (!success) throw new InsufficientSeatingCapacity();
+        return success;
     }
 
     class InsufficientSeatingCapacity extends RuntimeException {
