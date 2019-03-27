@@ -1,9 +1,8 @@
 package app;
 
 import java.util.List;
-import java.util.Objects;
 
-public class Reservation {
+public class Reservation implements Comparable<Reservation> {
     private final String id;
     private final int size;
     private final List<String> constraints;
@@ -19,15 +18,16 @@ public class Reservation {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Reservation)) return false;
-        Reservation that = (Reservation) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public int compareTo(Reservation that) {
+        if (this.id.compareTo(that.id) != 0)
+            if (this.size > that.size)
+                return -1;
+            else if (this.size < that.size)
+                return 1;
+            else if (this.constraints.size() > that.constraints.size())
+                return 1;
+            else
+                return -1;
+        else return 0;
     }
 }

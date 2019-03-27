@@ -2,9 +2,8 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class Table {
+public class Table implements Comparable<Table> {
 
     private final String id;
     private final int capacity;
@@ -22,7 +21,7 @@ public class Table {
     }
 
     private boolean tableHasCapacityFor(Reservation reservation) {
-        return reservation.getSize() < remainingCapacity();
+        return reservation.getSize() <= remainingCapacity();
     }
 
     public int remainingCapacity() {
@@ -31,15 +30,12 @@ public class Table {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Table)) return false;
-        Table table = (Table) o;
-        return id.equals(table.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public int compareTo(Table that) {
+        if (this.id.compareTo(that.id) != 0)
+            if (this.remainingCapacity() <= that.remainingCapacity())
+                return -1;
+            else
+                return 1;
+        return 0;
     }
 }

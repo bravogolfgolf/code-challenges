@@ -1,12 +1,12 @@
 package app;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Planner {
 
-    Set<Table> tables = new HashSet<>();
-    Set<Reservation> reservations = new HashSet<>();
+    Set<Table> tables = new TreeSet<>();
+    Set<Reservation> reservations = new TreeSet<>();
 
     public void add(Table table) {
         tables.add(table);
