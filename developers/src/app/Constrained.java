@@ -10,12 +10,12 @@ import java.util.Set;
 
 class Constrained {
 
-    boolean allocate(List<Reservation> unmatched, Set<Table> tables) {
-        List<Reservation> toBeMatched = new ArrayList<>(unmatched);
+    boolean allocate(List<Reservation> unmatchedReservations, Set<Table> tables) {
+        List<Reservation> toBeMatched = new ArrayList<>(unmatchedReservations);
 
-        HashMap<Table, List<Reservation>> potentialMatches = new HashMap<>();
+        HashMap<Table, List<Reservation>> matcher = new HashMap<>();
         for (Table table : tables) {
-            potentialMatches.put(table, new ArrayList<>());
+            matcher.put(table, new ArrayList<>());
         }
 
         for (Reservation potential : toBeMatched) {
@@ -23,38 +23,39 @@ class Constrained {
                 if (table.hasCapacityFor(potential)) {
                     if (table.hasReservations()) {
                         if (!conflictBetweenExistingReservationsAnd(potential, table)) {
-                            unmatched.remove(potential);
-                            potentialMatches.get(table).add(potential);
+                            unmatchedReservations.remove(potential);
+                            matcher.get(table).add(potential);
                             break;
                         }
 
                     } else {
-                        unmatched.remove(potential);
-                        potentialMatches.get(table).add(potential);
+                        unmatchedReservations.remove(potential);
+                        matcher.get(table).add(potential);
                         break;
                     }
                 }
             }
         }
 
-        if (unmatched.size() > 0)
+        if (has(unmatchedReservations))
             return false;
 
-        for (Table table : potentialMatches.keySet()) {
-            List<Reservation> list = potentialMatches.get(table);
-            if (list.size() >= 1) {
-                Reservation reservation = list.get(0);
-                table.add(reservation);
-                list.remove(reservation);
-                unmatched.addAll(list);
-                list.clear();
+        for (Table table : matcher.keySet()) {
+            List<Reservation> potentialMatches = matcher.get(table);
+            if (has(potentialMatches)) {
+
+                Reservation match = selectMatchFrom(potentialMatches);
+                potentialMatches.remove(match);
+                table.add(match);
+
+                unmatchedReservations.addAll(potentialMatches);
             }
         }
 
-        if (unmatched.size() == 0)
+        if (unmatchedReservations.size() == 0)
             return true;
 
-        return allocate(unmatched, tables);
+        return allocate(unmatchedReservations, tables);
     }
 
     private boolean conflictBetweenExistingReservationsAnd(Reservation potential, Table table) {
@@ -64,5 +65,13 @@ class Constrained {
             if (conflict) break;
         }
         return conflict;
+    }
+
+    private boolean has(List<Reservation> list) {
+        return list.size() > 0;
+    }
+
+    private Reservation selectMatchFrom(List<Reservation> list) {
+        return list.get(0);
     }
 }
