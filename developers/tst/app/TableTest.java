@@ -45,12 +45,13 @@ public class TableTest {
         Table a = new Table("A", 10);
         Table b = new Table("B", 10);
         Table c = new Table("C", 5);
+        Table dup = new Table("A", 5);
         assertEquals(-1, a.compareTo(b));
         assertEquals(1, a.compareTo(c));
         assertEquals(-1, b.compareTo(a));
         assertEquals(1, b.compareTo(c));
         assertEquals(-1, c.compareTo(a));
         assertEquals(-1, c.compareTo(b));
-        assertEquals(0, a.compareTo(a));
+        assertEquals(0, dup.compareTo(a));
     }
 }
