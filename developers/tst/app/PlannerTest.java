@@ -244,6 +244,12 @@ public class PlannerTest {
         assertEquals(9, table.remainingCapacity());
         assertEquals(9, table1.remainingCapacity());
         assertEquals(8, table2.remainingCapacity());
+
+        String expected = "Table A: Catalan, party of 3\n";
+        expected += "Table B: Andrews, party of 3\n";
+        expected += "Table C: Boeing, party of 4\n";
+        String actual = planner.display();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -284,5 +290,12 @@ public class PlannerTest {
         assertEquals(0, b.remainingCapacity());
         assertEquals(0, c.remainingCapacity());
         assertEquals(0, d.remainingCapacity());
+
+        String expected = "Table A: Garcia, party of 2\n";
+        expected += "Table B: Taylor, party of 5 & Thornton, party of 3\n";
+        expected += "Table C: Owens, party of 6 & Smith, party of 1\n";
+        expected += "Table D: Reese, party of 7\n";
+        String actual = planner.display();
+        assertEquals(expected, actual);
     }
 }
