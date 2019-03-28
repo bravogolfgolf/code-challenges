@@ -14,6 +14,10 @@ class Table implements Comparable<Table> {
         this.capacity = capacity;
     }
 
+    String id() {
+        return id;
+    }
+
     List<Reservation> reservations() {
         return reservations;
     }

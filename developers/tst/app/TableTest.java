@@ -54,4 +54,10 @@ public class TableTest {
         assertEquals(-1, c.compareTo(b));
         assertEquals(0, dup.compareTo(a));
     }
+
+    @Test
+    public void shouldRespondWithId(){
+        Table a = new Table("A", 10);
+        assertEquals("A", a.id());
+    }
 }
