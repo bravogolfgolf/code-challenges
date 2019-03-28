@@ -10,7 +10,7 @@ import java.util.Set;
 
 class Constrained {
 
-    boolean constrainedAllocation(List<Reservation> unmatched, Set<Table> tables) {
+    boolean allocate(List<Reservation> unmatched, Set<Table> tables) {
         List<Reservation> reservations = new ArrayList<>(unmatched);
 
         HashMap<Table, List<Reservation>> map = new HashMap<>();
@@ -59,6 +59,6 @@ class Constrained {
         if (unmatched.size() == 0)
             return true;
 
-        return constrainedAllocation(unmatched, tables);
+        return allocate(unmatched, tables);
     }
 }

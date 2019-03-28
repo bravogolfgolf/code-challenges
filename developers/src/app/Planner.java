@@ -47,7 +47,7 @@ class Planner {
         if (tableRemainingCapacity() < reservationTotal()) insufficientCapacity();
 
         unmatched.addAll(reservations);
-        if (!constrained.constrainedAllocation(unmatched, tables))
+        if (!constrained.allocate(unmatched, tables))
             if (!unConstrained.allocate(unmatched, tables))
                 insufficientCapacity();
     }

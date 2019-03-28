@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PlannerTest {
 
-    private Presenter presenter = new Presenter();
+    private final Presenter presenter = new Presenter();
     private Planner planner;
     private final List<String> emptyList = new ArrayList<>();
 
