@@ -23,12 +23,12 @@ public class Table implements Comparable<Table> {
     }
 
     public boolean add(Reservation reservation) {
-        if (tableHasCapacityFor(reservation))
+        if (hasCapacityFor(reservation))
             return reservations.add(reservation);
         return false;
     }
 
-    private boolean tableHasCapacityFor(Reservation reservation) {
+    public boolean hasCapacityFor(Reservation reservation) {
         return reservation.size() <= remainingCapacity();
     }
 
