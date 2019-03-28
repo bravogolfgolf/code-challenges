@@ -76,8 +76,6 @@ class Planner {
             for (Table table : tables) {
                 if (reservation.size() <= table.remainingCapacity()) {
                     if (table.reservations().size() >= 1) {
-                        // do the people already sitting like new arrival?
-                        // do new arrivals like people already sitting there
                         boolean result = false;
                         for (Reservation res : table.reservations()) {
                             result = res.dislike(reservation.id()) || reservation.dislike(res.id());
@@ -87,20 +85,8 @@ class Planner {
                         if (!result) {
                             unmatched.remove(reservation);
                             map.get(table).add(reservation);
+                            break;
                         }
-
-//                        for (Reservation r : table.reservations()) {
-//                            if (r.dislike(reservation.id()))
-//                                break;
-//                            else {
-//                                unmatched.remove(reservation);
-//                                map.get(table).add(reservation);
-//                            }
-//                            break;
-//                        }
-
-                        //
-
                     } else {
                         unmatched.remove(reservation);
                         map.get(table).add(reservation);

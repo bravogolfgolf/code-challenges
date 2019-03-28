@@ -181,8 +181,8 @@ public class PlannerTest {
 
         planner.plan();
         assertEquals(15, planner.tableRemainingCapacity());
-        assertEquals(6, table.remainingCapacity());
-        assertEquals(9, table1.remainingCapacity());
+        assertEquals(9, table.remainingCapacity());
+        assertEquals(6, table1.remainingCapacity());
 
     }
 
@@ -247,8 +247,48 @@ public class PlannerTest {
 
         planner.plan();
         assertEquals(26, planner.tableRemainingCapacity());
-        assertEquals(8, table.remainingCapacity());
+        assertEquals(9, table.remainingCapacity());
         assertEquals(9, table1.remainingCapacity());
-        assertEquals(9, table2.remainingCapacity());
+        assertEquals(8, table2.remainingCapacity());
+    }
+
+    @Test
+    public void exampleFromReadMe() {
+        Table a = new Table("A", 8);
+        Table b = new Table("B", 8);
+        Table c = new Table("C", 7);
+        Table d = new Table("D", 7);
+        planner.add(a);
+        planner.add(b);
+        planner.add(c);
+        planner.add(d);
+
+        Reservation thornton = new Reservation("Thornton", 3, emptyList);
+        Reservation garcia = new Reservation("Garcia", 2, emptyList);
+        List<String> owensConstraints = new ArrayList<String>() {{
+            add("Thornton");
+            add("Taylor");
+        }};
+        Reservation owens = new Reservation("Owens", 6, owensConstraints);
+        List<String> smithConstraints = new ArrayList<String>() {{
+            add("Garcia");
+        }};
+        Reservation smith = new Reservation("Smith", 1, smithConstraints);
+        Reservation taylor = new Reservation("Taylor", 5, emptyList);
+        Reservation reese = new Reservation("Reese", 7, emptyList);
+        planner.add(thornton);
+        planner.add(garcia);
+        planner.add(owens);
+        planner.add(smith);
+        planner.add(taylor);
+        planner.add(reese);
+
+        planner.plan();
+
+        assertEquals(6, planner.tableRemainingCapacity());
+        assertEquals(6, a.remainingCapacity());
+        assertEquals(0, b.remainingCapacity());
+        assertEquals(0, c.remainingCapacity());
+        assertEquals(0, d.remainingCapacity());
     }
 }
