@@ -13,15 +13,11 @@ import static org.junit.Assert.assertTrue;
 public class PlannerTest {
 
     private Planner planner;
-    private List<String> list;
+    private List<String> emptyList = new ArrayList<>();
 
     @Before
     public void setUp() {
         planner = new Planner();
-        list = new ArrayList<String>() {{
-            add("Thornton");
-            add("Taylor");
-        }};
     }
 
     @Test
@@ -58,15 +54,15 @@ public class PlannerTest {
 
     @Test
     public void plannerAcceptsReservations() {
-        Reservation reservation = new Reservation("Owens", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
         planner.add(reservation);
         assertEquals(1, planner.reservationCount());
     }
 
     @Test
     public void plannerDoesNotAcceptDuplicateReservationIds() {
-        Reservation reservation = new Reservation("Owens", 3, list);
-        Reservation reservation1 = new Reservation("Owens", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
+        Reservation reservation1 = new Reservation("Owens", 3, emptyList);
         planner.add(reservation);
         planner.add(reservation1);
         assertEquals(1, planner.reservationCount());
@@ -74,8 +70,8 @@ public class PlannerTest {
 
     @Test
     public void plannerReportsReservationTotal() {
-        Reservation reservation = new Reservation("Owens", 3, list);
-        Reservation reservation1 = new Reservation("Smith", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
+        Reservation reservation1 = new Reservation("Smith", 3, emptyList);
         planner.add(reservation);
         planner.add(reservation1);
         assertEquals(2, planner.reservationCount());
@@ -86,7 +82,7 @@ public class PlannerTest {
     public void shouldThrowExceptionWhenInsufficientCapacityForAllReservations() {
         Table table = new Table("A", 10);
         planner.add(table);
-        Reservation reservation = new Reservation("Owens", 13, list);
+        Reservation reservation = new Reservation("Owens", 13, emptyList);
         planner.add(reservation);
         planner.plan();
     }
@@ -95,8 +91,8 @@ public class PlannerTest {
     public void shouldAssignReservationsToTable() {
         Table table = new Table("A", 10);
         planner.add(table);
-        Reservation reservation = new Reservation("Owens", 3, list);
-        Reservation reservation1 = new Reservation("Smith", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
+        Reservation reservation1 = new Reservation("Smith", 3, emptyList);
         planner.add(reservation);
         planner.add(reservation1);
         planner.plan();
@@ -109,8 +105,8 @@ public class PlannerTest {
         Table table1 = new Table("B", 4);
         planner.add(table);
         planner.add(table1);
-        Reservation reservation = new Reservation("Owens", 3, list);
-        Reservation reservation1 = new Reservation("Smith", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
+        Reservation reservation1 = new Reservation("Smith", 3, emptyList);
         planner.add(reservation);
         planner.add(reservation1);
         planner.plan();
@@ -125,10 +121,134 @@ public class PlannerTest {
         Table table1 = new Table("B", 2);
         planner.add(table);
         planner.add(table1);
-        Reservation reservation = new Reservation("Owens", 3, list);
-        Reservation reservation1 = new Reservation("Smith", 3, list);
+        Reservation reservation = new Reservation("Owens", 3, emptyList);
+        Reservation reservation1 = new Reservation("Smith", 3, emptyList);
         planner.add(reservation);
         planner.add(reservation1);
         planner.plan();
+    }
+
+    @Test
+    public void testMatchingAlgorithm1() {
+        List<String> andrewsConstraints = new ArrayList<String>() {{
+            add("Boeing");
+            add("Catalan");
+        }};
+
+        List<String> boeingConstraints = new ArrayList<String>() {{
+            add("Catalan");
+        }};
+
+        Reservation andrews = new Reservation("Andrews", 3, andrewsConstraints);
+        Reservation boeing = new Reservation("Boeing", 3, boeingConstraints);
+        Reservation catalan = new Reservation("Catalan", 3, emptyList);
+
+        planner.add(catalan);
+        planner.add(boeing);
+        planner.add(andrews);
+
+        Table table = new Table("A", 12);
+        planner.add(table);
+
+        planner.plan();
+        assertEquals(3, planner.tableRemainingCapacity());
+        assertEquals(3, table.remainingCapacity());
+    }
+
+    @Test
+    public void testMatchingAlgorithm2() {
+        List<String> andrewsConstraints = new ArrayList<String>() {{
+            add("Boeing");
+            add("Catalan");
+        }};
+
+        List<String> boeingConstraints = new ArrayList<String>() {{
+            add("Catalan");
+        }};
+
+        Reservation andrews = new Reservation("Andrews", 3, andrewsConstraints);
+        Reservation boeing = new Reservation("Boeing", 3, boeingConstraints);
+        Reservation catalan = new Reservation("Catalan", 3, emptyList);
+
+        planner.add(catalan);
+        planner.add(boeing);
+        planner.add(andrews);
+
+        Table table = new Table("A", 12);
+        Table table1 = new Table("B", 12);
+        planner.add(table);
+        planner.add(table1);
+
+        planner.plan();
+        assertEquals(15, planner.tableRemainingCapacity());
+        assertEquals(6, table.remainingCapacity());
+        assertEquals(9, table1.remainingCapacity());
+
+    }
+
+    @Test
+    public void testMatchingAlgorithm3() {
+        List<String> andrewsConstraints = new ArrayList<String>() {{
+            add("Boeing");
+            add("Catalan");
+        }};
+
+        List<String> boeingConstraints = new ArrayList<String>() {{
+            add("Catalan");
+        }};
+
+        Reservation andrews = new Reservation("Andrews", 3, andrewsConstraints);
+        Reservation boeing = new Reservation("Boeing", 3, boeingConstraints);
+        Reservation catalan = new Reservation("Catalan", 3, emptyList);
+
+        planner.add(catalan);
+        planner.add(boeing);
+        planner.add(andrews);
+
+        Table table = new Table("A", 12);
+        Table table1 = new Table("B", 12);
+        Table table2 = new Table("C", 12);
+        planner.add(table);
+        planner.add(table1);
+        planner.add(table2);
+
+        planner.plan();
+        assertEquals(27, planner.tableRemainingCapacity());
+        assertEquals(9, table.remainingCapacity());
+        assertEquals(9, table1.remainingCapacity());
+        assertEquals(9, table2.remainingCapacity());
+    }
+
+    @Test
+    public void testMatchingAlgorithm4() {
+        List<String> andrewsConstraints = new ArrayList<String>() {{
+            add("Boeing");
+            add("Catalan");
+        }};
+
+        List<String> boeingConstraints = new ArrayList<String>() {{
+            add("Catalan");
+        }};
+
+        Reservation andrews = new Reservation("Andrews", 3, andrewsConstraints);
+        Reservation boeing = new Reservation("Boeing", 4, boeingConstraints);
+        Reservation catalan = new Reservation("Catalan", 3, emptyList);
+
+        planner.add(catalan);
+        planner.add(boeing);
+        planner.add(andrews);
+
+        Table table = new Table("A", 12);
+        Table table1 = new Table("B", 12);
+        Table table2 = new Table("C", 12);
+        planner.add(table);
+        planner.add(table1);
+        planner.add(table2);
+
+        planner.plan();
+        assertEquals(26, planner.tableRemainingCapacity());
+        assertEquals(8, table.remainingCapacity());
+        assertEquals(9, table1.remainingCapacity());
+        assertEquals(9, table2.remainingCapacity());
     }
 }
