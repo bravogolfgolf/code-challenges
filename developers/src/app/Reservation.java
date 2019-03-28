@@ -26,11 +26,6 @@ public class Reservation implements Comparable<Reservation> {
     }
 
     @Override
-    public String toString() {
-        return String.format("%s party of %d", id, size);
-    }
-
-    @Override
     public int compareTo(Reservation that) {
         if (this.id.compareTo(that.id) != 0)
             if (this.size > that.size)
