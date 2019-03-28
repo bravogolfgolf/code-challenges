@@ -3,7 +3,7 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
-class Table implements Comparable<Table> {
+public class Table implements Comparable<Table> {
 
     private final String id;
     private final int capacity;
@@ -14,11 +14,11 @@ class Table implements Comparable<Table> {
         this.capacity = capacity;
     }
 
-    String id() {
+    public String id() {
         return id;
     }
 
-    List<Reservation> reservations() {
+    public List<Reservation> reservations() {
         return reservations;
     }
 

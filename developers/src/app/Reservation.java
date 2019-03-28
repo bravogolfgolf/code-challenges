@@ -2,7 +2,7 @@ package app;
 
 import java.util.List;
 
-class Reservation implements Comparable<Reservation> {
+public class Reservation implements Comparable<Reservation> {
     private final String id;
     private final int size;
     private final List<String> constraints;
@@ -13,11 +13,11 @@ class Reservation implements Comparable<Reservation> {
         this.constraints = constraints;
     }
 
-    String id() {
+    public String id() {
         return id;
     }
 
-    int size() {
+    public int size() {
         return size;
     }
 

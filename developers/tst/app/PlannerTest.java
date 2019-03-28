@@ -3,6 +3,7 @@ package app;
 import app.Planner.InsufficientSeatingCapacity;
 import org.junit.Before;
 import org.junit.Test;
+import ui.Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +12,13 @@ import static org.junit.Assert.assertEquals;
 
 public class PlannerTest {
 
+    private Presenter presenter = new Presenter();
     private Planner planner;
     private final List<String> emptyList = new ArrayList<>();
 
     @Before
     public void setUp() {
-        planner = new Planner();
+        planner = new Planner(presenter);
     }
 
     @Test

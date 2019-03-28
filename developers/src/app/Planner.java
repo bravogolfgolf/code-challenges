@@ -1,12 +1,18 @@
 package app;
 
+import ui.Presenter;
+
 import java.util.*;
 
 class Planner {
-
     private final Set<Table> tables = new TreeSet<>();
     private final Set<Reservation> reservations = new TreeSet<>();
     private final List<Reservation> unmatched = new ArrayList<>();
+    private Presenter presenter;
+
+    Planner(Presenter presenter) {
+        this.presenter = presenter;
+    }
 
     void add(Table table) {
         tables.add(table);
@@ -113,22 +119,7 @@ class Planner {
     }
 
     String display() {
-        List<Table> list = new ArrayList<>(tables);
-        list.sort(Comparator.comparing(Table::id));
-
-        String result = "";
-        for (Table table : list) {
-            result += String.format("Table %s: ", table.id());
-
-            if (table.reservations().size() > 0)
-                result += String.format("%s, party of %d", table.reservations().get(0).id(), table.reservations().get(0).size());
-            if (table.reservations().size() > 1)
-                for (int i = 1; i < table.reservations().size(); i++) {
-                    result += String.format(" & %s, party of %d", table.reservations().get(i).id(), table.reservations().get(i).size());
-                }
-            result += "\n";
-        }
-        return result;
+        return presenter.present(tables);
     }
 
     class InsufficientSeatingCapacity extends RuntimeException {
