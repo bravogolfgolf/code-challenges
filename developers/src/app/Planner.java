@@ -70,9 +70,6 @@ class Planner {
     }
 
     private boolean constrainedAllocation(List<Reservation> unmatched) {
-        if (unmatched.size() == 0)
-            return true;
-
         List<Reservation> reservations = new ArrayList<>(unmatched);
 
         HashMap<Table, List<Reservation>> map = new HashMap<>();
@@ -117,6 +114,10 @@ class Planner {
                 list.clear();
             }
         }
+
+        if (unmatched.size() == 0)
+            return true;
+
         return constrainedAllocation(unmatched);
     }
 
