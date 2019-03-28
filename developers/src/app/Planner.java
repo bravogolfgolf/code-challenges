@@ -4,12 +4,14 @@ import entity.Reservation;
 import entity.Table;
 import ui.Presenter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 class Planner {
     private final Set<Table> tables = new TreeSet<>();
     private final Set<Reservation> reservations = new TreeSet<>();
-    private final List<Reservation> unmatched = new ArrayList<>();
     private final Unconstrained unConstrained = new Unconstrained();
     private final Constrained constrained = new Constrained();
     private final Presenter presenter;
@@ -46,7 +48,7 @@ class Planner {
 
         if (tableRemainingCapacity() < reservationTotal()) insufficientCapacity();
 
-        unmatched.addAll(reservations);
+        List<Reservation> unmatched = new ArrayList<>(reservations);
         if (!constrained.allocate(unmatched, tables))
             if (!unConstrained.allocate(unmatched, tables))
                 insufficientCapacity();
