@@ -1,6 +1,8 @@
 package app;
 
 import app.Planner.InsufficientSeatingCapacity;
+import entity.Reservation;
+import entity.Table;
 import org.junit.Before;
 import org.junit.Test;
 import ui.Presenter;

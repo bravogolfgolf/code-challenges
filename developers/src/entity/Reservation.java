@@ -1,4 +1,4 @@
-package app;
+package entity;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class Reservation implements Comparable<Reservation> {
     private final int size;
     private final List<String> constraints;
 
-    Reservation(String id, int size, List<String> constraints) {
+    public Reservation(String id, int size, List<String> constraints) {
         this.id = id;
         this.size = size;
         this.constraints = constraints;
@@ -21,7 +21,7 @@ public class Reservation implements Comparable<Reservation> {
         return size;
     }
 
-    boolean dislike(String name) {
+    public boolean dislike(String name) {
         return constraints.contains(name);
     }
 

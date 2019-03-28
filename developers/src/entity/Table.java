@@ -1,4 +1,4 @@
-package app;
+package entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ public class Table implements Comparable<Table> {
     private final int capacity;
     private final List<Reservation> reservations = new ArrayList<>();
 
-    Table(String id, int capacity) {
+    public Table(String id, int capacity) {
         this.id = id;
         this.capacity = capacity;
     }
@@ -22,7 +22,7 @@ public class Table implements Comparable<Table> {
         return reservations;
     }
 
-    boolean add(Reservation reservation) {
+    public boolean add(Reservation reservation) {
         if (tableHasCapacityFor(reservation))
             return reservations.add(reservation);
         return false;
@@ -32,7 +32,7 @@ public class Table implements Comparable<Table> {
         return reservation.size() <= remainingCapacity();
     }
 
-    int remainingCapacity() {
+    public int remainingCapacity() {
         int currentTotal = reservations.stream().mapToInt(Reservation::size).sum();
         return capacity - currentTotal;
     }

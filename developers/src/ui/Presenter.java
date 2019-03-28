@@ -1,6 +1,6 @@
 package ui;
 
-import app.Table;
+import entity.Table;
 
 import java.util.ArrayList;
 import java.util.Comparator;

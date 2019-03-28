@@ -1,5 +1,7 @@
-package app;
+package entity;
 
+import entity.Reservation;
+import entity.Table;
 import org.junit.Before;
 import org.junit.Test;
 

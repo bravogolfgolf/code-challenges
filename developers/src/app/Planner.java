@@ -1,5 +1,7 @@
 package app;
 
+import entity.Reservation;
+import entity.Table;
 import ui.Presenter;
 
 import java.util.*;
