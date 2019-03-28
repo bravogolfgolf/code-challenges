@@ -21,11 +21,6 @@ public class PlannerTest {
     }
 
     @Test
-    public void createPlanner() {
-        assertTrue(planner instanceof Planner);
-    }
-
-    @Test
     public void plannerAcceptTables() {
         Table table = new Table("A", 10);
         planner.add(table);
