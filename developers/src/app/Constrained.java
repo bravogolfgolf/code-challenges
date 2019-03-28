@@ -24,7 +24,7 @@ class Constrained {
                     if (table.hasReservations()) {
                         boolean conflict = false;
                         for (Reservation existing : table.reservations()) {
-                            conflict = existing.dislike(potential) || potential.dislike(existing);
+                            conflict = existing.dislikes(potential) || potential.dislikes(existing);
                             if (conflict) break;
                         }
 
@@ -33,6 +33,7 @@ class Constrained {
                             potentialMatches.get(table).add(potential);
                             break;
                         }
+
                     } else {
                         unmatched.remove(potential);
                         potentialMatches.get(table).add(potential);

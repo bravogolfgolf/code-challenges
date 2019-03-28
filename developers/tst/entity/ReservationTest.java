@@ -34,6 +34,6 @@ public class ReservationTest {
 
     @Test
     public void shouldReturnTrueIfDislike() {
-        assertTrue(reservation.dislike(new Reservation("Thornton", 3, null)));
+        assertTrue(reservation.dislikes(new Reservation("Thornton", 3, null)));
     }
 }
