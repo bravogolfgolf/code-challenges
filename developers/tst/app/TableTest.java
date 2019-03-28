@@ -39,4 +39,18 @@ public class TableTest {
     public void tablesReportRemainingCapacity() {
         assertEquals(10, table.remainingCapacity());
     }
+
+    @Test
+    public void exerciseCompareTo() {
+        Table a = new Table("A", 10);
+        Table b = new Table("B", 10);
+        Table c = new Table("C", 5);
+        assertEquals(-1, a.compareTo(b));
+        assertEquals(1, a.compareTo(c));
+        assertEquals(-1, b.compareTo(a));
+        assertEquals(1, b.compareTo(c));
+        assertEquals(-1, c.compareTo(a));
+        assertEquals(-1, c.compareTo(b));
+        assertEquals(0, a.compareTo(a));
+    }
 }
