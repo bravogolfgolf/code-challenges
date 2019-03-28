@@ -23,10 +23,17 @@ public class TableTest {
     }
 
     @Test
+    public void shouldRespondWithId() {
+        Table a = new Table("A", 10);
+        assertEquals("A", a.id());
+    }
+
+    @Test
     public void addingReservationToTableWithCapacitySucceeds() {
         Reservation reservation = new Reservation("Owens", 3, list);
+        assertFalse(table.hasReservations());
         assertTrue(table.add(reservation));
-        assertEquals(1, table.reservations().size());
+        assertTrue(table.hasReservations());
     }
 
     @Test
@@ -53,11 +60,5 @@ public class TableTest {
         assertEquals(-1, c.compareTo(a));
         assertEquals(-1, c.compareTo(b));
         assertEquals(0, dup.compareTo(a));
-    }
-
-    @Test
-    public void shouldRespondWithId(){
-        Table a = new Table("A", 10);
-        assertEquals("A", a.id());
     }
 }

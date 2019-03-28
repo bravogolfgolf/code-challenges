@@ -11,31 +11,31 @@ import java.util.Set;
 class Constrained {
 
     boolean allocate(List<Reservation> unmatched, Set<Table> tables) {
-        List<Reservation> reservations = new ArrayList<>(unmatched);
+        List<Reservation> toBeMatched = new ArrayList<>(unmatched);
 
-        HashMap<Table, List<Reservation>> map = new HashMap<>();
+        HashMap<Table, List<Reservation>> potentialMatches = new HashMap<>();
         for (Table table : tables) {
-            map.put(table, new ArrayList<>());
+            potentialMatches.put(table, new ArrayList<>());
         }
 
-        for (Reservation reservation : reservations) {
+        for (Reservation potential : toBeMatched) {
             for (Table table : tables) {
-                if (reservation.size() <= table.remainingCapacity()) {
-                    if (table.reservations().size() >= 1) {
-                        boolean result = false;
-                        for (Reservation res : table.reservations()) {
-                            result = res.dislike(reservation.id()) || reservation.dislike(res.id());
-                            if (result) break;
+                if (table.hasCapacityFor(potential)) {
+                    if (table.hasReservations()) {
+                        boolean conflict = false;
+                        for (Reservation existing : table.reservations()) {
+                            conflict = existing.dislike(potential) || potential.dislike(existing);
+                            if (conflict) break;
                         }
 
-                        if (!result) {
-                            unmatched.remove(reservation);
-                            map.get(table).add(reservation);
+                        if (!conflict) {
+                            unmatched.remove(potential);
+                            potentialMatches.get(table).add(potential);
                             break;
                         }
                     } else {
-                        unmatched.remove(reservation);
-                        map.get(table).add(reservation);
+                        unmatched.remove(potential);
+                        potentialMatches.get(table).add(potential);
                         break;
                     }
                 }
@@ -45,8 +45,8 @@ class Constrained {
         if (unmatched.size() > 0)
             return false;
 
-        for (Table table : map.keySet()) {
-            List<Reservation> list = map.get(table);
+        for (Table table : potentialMatches.keySet()) {
+            List<Reservation> list = potentialMatches.get(table);
             if (list.size() >= 1) {
                 Reservation reservation = list.get(0);
                 table.add(reservation);

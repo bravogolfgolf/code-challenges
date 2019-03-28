@@ -18,6 +18,10 @@ public class Table implements Comparable<Table> {
         return id;
     }
 
+    public boolean hasReservations() {
+        return reservations.size() > 0;
+    }
+
     public List<Reservation> reservations() {
         return reservations;
     }

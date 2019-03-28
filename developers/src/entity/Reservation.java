@@ -21,8 +21,8 @@ public class Reservation implements Comparable<Reservation> {
         return size;
     }
 
-    public boolean dislike(String name) {
-        return constraints.contains(name);
+    public boolean dislike(Reservation reservation) {
+        return constraints.contains(reservation.id);
     }
 
     @Override

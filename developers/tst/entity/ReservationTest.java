@@ -1,6 +1,5 @@
 package entity;
 
-import entity.Reservation;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +34,6 @@ public class ReservationTest {
 
     @Test
     public void shouldReturnTrueIfDislike() {
-        assertTrue(reservation.dislike("Thornton"));
+        assertTrue(reservation.dislike(new Reservation("Thornton", 3, null)));
     }
 }
