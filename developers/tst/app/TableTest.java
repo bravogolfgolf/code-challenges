@@ -26,7 +26,7 @@ public class TableTest {
     public void addingReservationToTableWithCapacitySucceeds() {
         Reservation reservation = new Reservation("Owens", 3, list);
         assertTrue(table.add(reservation));
-        assertEquals(1, table.reservation().size());
+        assertEquals(1, table.reservations().size());
     }
 
     @Test

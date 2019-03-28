@@ -14,7 +14,7 @@ public class Table implements Comparable<Table> {
         this.capacity = capacity;
     }
 
-    List<Reservation> reservation() {
+    List<Reservation> reservations() {
         return reservations;
     }
 
@@ -43,9 +43,9 @@ public class Table implements Comparable<Table> {
     public int compareTo(Table that) {
         if (this.id.compareTo(that.id) != 0)
             if (this.remainingCapacity() <= that.remainingCapacity())
-                return -1;
-            else
                 return 1;
+            else
+                return -1;
         return 0;
     }
 }
