@@ -22,13 +22,7 @@ class Constrained {
             for (Table table : tables) {
                 if (table.hasCapacityFor(potential)) {
                     if (table.hasReservations()) {
-                        boolean conflict = false;
-                        for (Reservation existing : table.reservations()) {
-                            conflict = existing.dislikes(potential) || potential.dislikes(existing);
-                            if (conflict) break;
-                        }
-
-                        if (!conflict) {
+                        if (!conflictBetweenExistingReservationsAnd(potential, table)) {
                             unmatched.remove(potential);
                             potentialMatches.get(table).add(potential);
                             break;
@@ -61,5 +55,14 @@ class Constrained {
             return true;
 
         return allocate(unmatched, tables);
+    }
+
+    private boolean conflictBetweenExistingReservationsAnd(Reservation potential, Table table) {
+        boolean conflict = false;
+        for (Reservation existing : table.reservations()) {
+            conflict = existing.dislikes(potential) || potential.dislikes(existing);
+            if (conflict) break;
+        }
+        return conflict;
     }
 }
