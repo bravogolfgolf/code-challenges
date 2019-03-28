@@ -1,0 +1,6 @@
+To do:
+Add Controller
+User interface that accepts input
+Refactor Presenter
+Move algorithms tests from PlannerTest -- Test algorithms directly rather than through planner
+Inject Planner with different matching algorithms and chain them together properly
