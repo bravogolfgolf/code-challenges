@@ -4,9 +4,9 @@ import java.util.*;
 
 class Planner {
 
-    private Set<Table> tables = new TreeSet<>();
-    private Set<Reservation> reservations = new TreeSet<>();
-    private List<Reservation> unmatched = new ArrayList<>();
+    private final Set<Table> tables = new TreeSet<>();
+    private final Set<Reservation> reservations = new TreeSet<>();
+    private final List<Reservation> unmatched = new ArrayList<>();
 
     void add(Table table) {
         tables.add(table);

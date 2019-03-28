@@ -2,7 +2,7 @@ package app;
 
 import java.util.List;
 
-public class Reservation implements Comparable<Reservation> {
+class Reservation implements Comparable<Reservation> {
     private final String id;
     private final int size;
     private final List<String> constraints;

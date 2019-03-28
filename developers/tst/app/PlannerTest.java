@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class PlannerTest {
 
     private Planner planner;
-    private List<String> emptyList = new ArrayList<>();
+    private final List<String> emptyList = new ArrayList<>();
 
     @Before
     public void setUp() {

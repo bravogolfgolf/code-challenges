@@ -3,13 +3,13 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table implements Comparable<Table> {
+class Table implements Comparable<Table> {
 
     private final String id;
     private final int capacity;
     private final List<Reservation> reservations = new ArrayList<>();
 
-    public Table(String id, int capacity) {
+    Table(String id, int capacity) {
         this.id = id;
         this.capacity = capacity;
     }
